@@ -1,0 +1,33 @@
+/* navbar.module.css */
+.navLink {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
+  transition: color 0.3s ease, box-shadow 0.3s ease;
+  color: #1f1e1e; /* Gray color for text */
+  font-size: 16px; /* Slightly larger font size for better readability */
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.navLink:hover::after {
+  background: rgba(0, 0, 0, 0.6); /* Darker gray shadow underline */
+}
+
+.activeLink {
+  color: #1f2937; /* Darker gray for active link */
+  font-weight: bold;
+}
+
+.activeLink::after {
+  background: #1f2937; /* Dark gray underline for active link */
+}
