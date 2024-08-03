@@ -1,0 +1,63 @@
+version: "3"
+services:
+  deliver-jokes-service:
+    build: ./deliver-jokes-microservice
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - DB_HOST=mysql_db
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_PASSWORD=Ratheshan@03
+      - DB_NAME=jokes_service_db
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    volumes:
+      - ./deliver-jokes-microservice/src:/usr/src/app/src
+
+  submit-jokes-service:
+    build: ./submit-jokes-microservice
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGODB_URI=mongodb+srv://ratheshan:rathe03@jokes-db.jnk3auf.mongodb.net/?retryWrites=true&w=majority&appName=jokes-db
+      - PORT=3001
+      - MONGO_URI_USERNAME=ratheshan
+      - MONGO_URI_PASSWORD=rathe03
+    volumes:
+      - ./submit-jokes-microservice/src:/usr/src/app/src
+
+  moderate-jokes-service:
+    build: ./moderate-jokes-microservice
+    ports:
+      - "3002:3002"
+    environment:
+      - JWT_SECRET=Ratheshan@03
+      - PORT=3002
+      - DB_HOST=mysql_db
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_PASSWORD=Ratheshan@03
+      - DB_NAME=jokes_service_db
+      - MONGODB_URI=mongodb+srv://ratheshan:rathe03@jokes-db.jnk3auf.mongodb.net/?retryWrites=true&w=majority&appName=jokes-db
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+
+  mysql_db:
+    image: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=Ratheshan@03
+      - MYSQL_DATABASE=jokes_service_db
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testuser123
+      - MYSQL_TCP_PORT=3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
