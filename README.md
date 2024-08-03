@@ -44,17 +44,19 @@ pnpm dev
 bun dev
 ```
 
-### In order to run the application Prperly You have to run the 3 Microservices Too.
+### In order to run the full application in its intended way, You have to run the 3 Microservices along with this frontend in Docker.
 
 - git clone https://github.com/ratheshan03/deliver-jokes-microservices.git
 - git clone https://github.com/ratheshan03/submit-jokes-microservices.git
 - git clone https://github.com/ratheshan03/moderate-jokes-microservices.git
 
-Once Front end and other Microservces were cloned and installed to the same directory, user should run the docker compose command to run the Microservices and then run the front end separately.
+Once Front nd and other Microservices were cloned and installed to the same directory, user should run the docker compose file (download the file from this repository root directory) and run the command to start the Microservices.
+This will enable the full potential of the Jokes Application.
 
-## Support
-
-Still in-progress:
+## Still in-progress: To-do List
+ - Frontend Styling
+ - Deployment
+ - Integration of CI/CD Pipelines
 
 ## License
 
