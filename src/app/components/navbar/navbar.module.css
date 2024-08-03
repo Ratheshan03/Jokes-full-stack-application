@@ -1,11 +1,12 @@
-/* navbar.module.css */
 .navLink {
   position: relative;
   display: inline-block;
   padding-bottom: 4px;
-  transition: color 0.3s ease, box-shadow 0.3s ease;
-  color: #1f1e1e; /* Gray color for text */
-  font-size: 16px; /* Slightly larger font size for better readability */
+  transition:
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+  color: #1f1e1e;
+  font-size: 16px;
 }
 
 .navLink::after {
@@ -20,14 +21,14 @@
 }
 
 .navLink:hover::after {
-  background: rgba(0, 0, 0, 0.6); /* Darker gray shadow underline */
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .activeLink {
-  color: #1f2937; /* Darker gray for active link */
+  color: #1f2937;
   font-weight: bold;
 }
 
 .activeLink::after {
-  background: #1f2937; /* Dark gray underline for active link */
+  background: #1f2937;
 }

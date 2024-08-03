@@ -35,8 +35,8 @@ export default function SubmitJoke() {
       });
       const data = await response.json();
       toast.success("Joke submitted successfully!");
-      setContent(""); // Clear the form after submission
-      setType(""); // Reset the type selection
+      setContent("");
+      setType("");
     } catch (error) {
       console.error("Error submitting joke:", error);
       toast.error("Failed to submit joke.");

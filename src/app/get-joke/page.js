@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AdjustmentsIcon } from "@heroicons/react/24/outline"; // Ensure this is correctly imported
+import { AdjustmentsIcon } from "@heroicons/react/24/outline";
 import styles from "./get-joke.module.css";
 
 export default function GetJoke() {
