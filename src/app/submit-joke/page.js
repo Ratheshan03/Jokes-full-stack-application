@@ -15,12 +15,14 @@ export default function SubmitJoke() {
     "Pun",
     "Tech",
     "Science",
+    "Animal",
     "Math",
     "History",
     "Sports",
     "Entertainment",
   ]);
   const [loading, setLoading] = useState(false);
+  const [randomJoke, setRandomJoke] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,6 +42,33 @@ export default function SubmitJoke() {
       toast.error("Failed to submit joke.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchRandomJoke = async () => {
+    console.log("API KEY -> ", process.env.NEXT_PUBLIC_API_NINJAS_KEY);
+    try {
+      const response = await fetch("https://api.api-ninjas.com/v1/jokes", {
+        headers: {
+          "X-Api-Key": process.env.NEXT_PUBLIC_API_NINJAS_KEY,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch");
+      }
+
+      const data = await response.json();
+      console.log(JSON.stringify(data));
+
+      if (data.length > 0) {
+        setRandomJoke(data[0].joke);
+      } else {
+        toast.error("No jokes found.");
+      }
+    } catch (error) {
+      console.error("Error fetching random joke:", error);
+      toast.error("Failed to fetch a random joke.");
     }
   };
 
@@ -88,6 +117,25 @@ export default function SubmitJoke() {
             {loading ? "Submitting..." : "Submit Joke"}
           </button>
         </form>
+
+        {/* New Section for Random Joke Generator */}
+        <div className={styles.randomJokeContainer}>
+          <h2>Need some inspiration? Try a random joke!</h2>
+          <button onClick={fetchRandomJoke} className={styles.randomJokeButton}>
+            Get Random Joke
+          </button>
+          {randomJoke && (
+            <div className={styles.randomJoke}>
+              <p>{randomJoke}</p>
+              <button
+                onClick={() => setContent(randomJoke)}
+                className={styles.useJokeButton}
+              >
+                Use This Joke
+              </button>
+            </div>
+          )}
+        </div>
       </div>
       <ToastContainer
         position="top-center"
